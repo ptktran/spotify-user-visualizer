@@ -1,7 +1,5 @@
 import React from 'react';
-
-const AUTH_URL =
-    "https://accounts.spotify.com/authorize?client_id=befbe424967c4a1fb35027bbb437ea0c&response_type=code&redirect_uri=http://localhost:3000&scope=streaming%20user-read-email%20user-read-private%20user-library-read%20user-library-modify%20user-read-playback-state%20user-modify-playback-state"
+import { loginUrl } from './Spotify';
 
 export default function Login() {
     return (
@@ -12,7 +10,7 @@ export default function Login() {
                     <h1 class="font-manrope text-xl basis-full text-center text-white">Your Spotify stats all in one place!</h1>
                     <h1 class="font-manrope text-xl basis-full text-center text-white">Login now to generate your personalized card :{')'} </h1>
                 </div>
-                <a href={AUTH_URL}>
+                <a href={loginUrl}>
                     <button class="rounded-full h-18 w-60 bg-spotify-green m-7 py-3 px-12 hover:bg-spotify-green/80 hover:-translate-y-0.5 active:translate-y-0.5 transition duration-100 ease">
                         <img class="m-auto" src={require('./assets/spotify-logo-black.png')} alt="spotify-logo"></img>
                     </button>
