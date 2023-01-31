@@ -27,10 +27,12 @@ export function GenerateCard() {
 
     const [Name, setName] = useState("");
     const [Followers, setFollowers] = useState(0);
+    const [ProfilePic, setProfilePic] = useState("");
     useEffect(() => {
         spotify.getMe().then((user) => {
             setName(user.display_name);
             setFollowers(user.followers.total);
+            setProfilePic(user.images[0].url);
         })
     }, [])
 
@@ -92,15 +94,29 @@ export function GenerateCard() {
         return topGenreCurrent;
     }
     
-    // const [topSongCurrent, setTopSongCurrent] = useState([]);
-
+    const [topSongCurrent, setTopSongCurrent] = useState([]);
+    const [topSongCurrentArtist, setTopSongCurrentArtist] = useState([]);
+    const [topSongCurrentCover, setTopSongCurrentCover] = useState([]);
+    useEffect(() => {
+        spotify.getMyTopTracks({ time_range: "short_term" }).then((data) => {
+            setTopSongCurrent(data.items[0].name);
+            setTopSongCurrentArtist(data.items[0].artists[0].name);
+            setTopSongCurrentCover(data.items[0].album.images[0].url);
+            console.log(data.items);
+        });
+    }, []);
+    console.log("TOP", topSongCurrent);
+    console.log("TOP", topSongCurrentArtist);
     
     return (
         <div>
             <h1>Hello {Name}!!!</h1>
             <div>{Followers} followers</div>
+            <img src={ProfilePic} width="10%"/>
             <h1>Current favourite genre: {genreCurrent()}</h1>
             <h1>All-time favourite genre: {genreAllTime()}</h1>
+            <h1>Current favourite song: {topSongCurrent} by {topSongCurrentArtist}</h1>
+            <img src={topSongCurrentCover} alt="" width="20%"/>
         </div>
     );
 }
