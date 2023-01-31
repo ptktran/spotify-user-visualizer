@@ -10,11 +10,13 @@ export default function Login() {
                     <h1 class="font-manrope text-xl basis-full text-center text-white">Your Spotify stats all in one place!</h1>
                     <h1 class="font-manrope text-xl basis-full text-center text-white">Login now to generate your personalized card :{')'} </h1>
                 </div>
-                <a href={loginUrl}>
-                    <button class="rounded-full h-18 w-60 bg-spotify-green m-7 py-3 px-12 hover:bg-spotify-green/80 hover:-translate-y-0.5 active:translate-y-0.5 transition duration-100 ease">
-                        <img class="m-auto" src={require('./assets/spotify-logo-black.png')} alt="spotify-logo"></img>
-                    </button>
-                </a>
+                <div class="m-6">
+                    <a href={loginUrl}>
+                        <button class="rounded-full h-18 w-60 bg-spotify-green py-3 px-12 hover:bg-spotify-green/80 hover:-translate-y-0.5 active:translate-y-0.5 transition duration-100 ease">
+                            <img class="m-auto" src={require('./assets/spotify-logo-black.png')} alt="spotify-logo"></img>
+                        </button>
+                    </a>
+                </div>
             </div>
         </body>
     )
