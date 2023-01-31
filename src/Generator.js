@@ -13,38 +13,94 @@ export function CheckToken() {
     if (token) {
         user_token = token
     }
-        // spotify.setAccessToken(user_token);
-        // spotify.getMe().then((user) => {
-        //     console.log("USERNAME", user.display_name);
-        //     console.log("PROFILE PIC", user.images);
-        // });
-
-        // window.localStorage.setItem('user-token', user_token);
-        // console.log("THE TOKEN >", user_token);
     return (user_token);
 }
 
-export function GenerateCard() {
-    const [Name, setName] = useState("");
-    const [Image, setImage] = useState(null);
-    const [Country, setCountry] = useState("");
-    const [Followers, setFollowers] = useState(0);
-    
+// name, followers DONE
+// favourite genre DONE
+// favourite song
+// favourite artist
+// recently played song
 
+export function GenerateCard() {
+    spotify.setAccessToken(user_token);
+
+    const [Name, setName] = useState("");
+    const [Followers, setFollowers] = useState(0);
     useEffect(() => {
-        spotify.setAccessToken(user_token);
-        spotify.getMyTopArtists().then((value) => {
-            console.log(value.items[0].name);
-        });
-        console.log(spotify.getMyTopTracks());
         spotify.getMe().then((user) => {
-            console.log(user)
+            setName(user.display_name);
+            setFollowers(user.followers.total);
+        })
+    }, [])
+
+    const [topArtistsAllTime, setTopArtistsAllTime] = useState([]);
+    const [genresAllTime, setGenresAllTime] = useState([]);
+    useEffect(() => {
+        spotify.getMyTopArtists({ time_range: "long_term" }).then((data) => {
+            setTopArtistsAllTime(data.items);
+            Promise.all(
+                data.items.map((artist) => spotify.getArtist(artist.id))
+            ).then((artistData) => {
+                const genres = artistData.map((artist) => artist.genres).flat();
+                setGenresAllTime(genres);
+            });
+        });
+    }, []);
+    
+    function genreAllTime() {
+        let genreCountsAllTime = {};
+        genresAllTime.forEach((genre) => {
+            if (!genreCountsAllTime[genre]) {
+                genreCountsAllTime[genre] = 1;
+            } else {
+                genreCountsAllTime[genre]++;
+            }
+        });
+        const topGenreAllTime = Object.keys(genreCountsAllTime).sort(
+            (a, b) => genreCountsAllTime[b] - genreCountsAllTime[a]
+        )[0];
+        return topGenreAllTime;
+    }
+
+    const [topArtistsCurrent, setTopArtistsCurrent] = useState([]);
+    const [genresCurrent, setGenresCurrent] = useState([]);
+    useEffect(() => {
+        spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
+            setTopArtistsCurrent(data.items);
+            Promise.all(
+                data.items.map((artist) => spotify.getArtist(artist.id))
+            ).then((artistData) => {
+                const genres = artistData.map((artist) => artist.genres).flat();
+                setGenresCurrent(genres);
+            });
         });
     }, []);
 
+    function genreCurrent() {
+        let genreCountsCurrent = {};
+        genresCurrent.forEach((genre) => {
+            if (!genreCountsCurrent[genre]) {
+                genreCountsCurrent[genre] = 1;
+            } else {
+                genreCountsCurrent[genre]++;
+            }
+        });
+        const topGenreCurrent = Object.keys(genreCountsCurrent).sort(
+            (a, b) => genreCountsCurrent[b] - genreCountsCurrent[a]
+        )[0];
+        return topGenreCurrent;
+    }
+    
+    // const [topSongCurrent, setTopSongCurrent] = useState([]);
+
+    
     return (
         <div>
-        <h1></h1>
+            <h1>Hello {Name}!!!</h1>
+            <div>{Followers} followers</div>
+            <h1>Current favourite genre: {genreCurrent()}</h1>
+            <h1>All-time favourite genre: {genreAllTime()}</h1>
         </div>
     );
 }
