@@ -19,7 +19,10 @@ function App() {
             spotify.getMe().then((user) => {
                 console.log("USERNAME", user.display_name);
             });
-            console.log(token);
+
+            window.localStorage.setItem('user-token', _token);
+            const token = _token;
+            console.log("THE TOKEN >", token);
         }
     }, []);
     
