@@ -11,6 +11,7 @@ function App() {
                     <GenerateCard />
                 </div>
             )}
+
         </div>
     );
 }
