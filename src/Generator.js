@@ -40,59 +40,59 @@ export function GenerateCard() {
 
 
     // SEARCH FUNCTIONS FOR TOP GENRE
-    
+
     const [topArtistsCurrent, setTopArtistsCurrent] = useState({ artists: [], genres: [] });
     useEffect(() => {
-      spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
-        Promise.all(
-          data.items.map((artist) => spotify.getArtist(artist.id))
-        ).then((artistData) => {
-          const genres = artistData.map((artist) => artist.genres).flat();
-          setTopArtistsCurrent({ artists: data.items, genres });
+        spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
+            Promise.all(
+                data.items.map((artist) => spotify.getArtist(artist.id))
+            ).then((artistData) => {
+                const genres = artistData.map((artist) => artist.genres).flat();
+                setTopArtistsCurrent({ artists: data.items, genres });
+            });
         });
-      });
     }, []);
 
     function genreCurrent() {
-      let genreCounts = {};
-      topArtistsCurrent.genres.forEach((genre) => {
-        if (!genreCounts[genre]) {
-          genreCounts[genre] = 1;
-        } else {
-          genreCounts[genre]++;
-        }
-      });
-      const topGenreCurrent = Object.keys(genreCounts).sort(
-        (a, b) => genreCounts[b] - genreCounts[a]
-      )[0];
-      return topGenreCurrent;
+        let genreCounts = {};
+        topArtistsCurrent.genres.forEach((genre) => {
+            if (!genreCounts[genre]) {
+                genreCounts[genre] = 1;
+            } else {
+                genreCounts[genre]++;
+            }
+        });
+        const topGenreCurrent = Object.keys(genreCounts).sort(
+            (a, b) => genreCounts[b] - genreCounts[a]
+        )[0];
+        return topGenreCurrent;
     }
-    
+
     const [topArtistsAllTime, setTopArtistsAllTime] = useState({ artists: [], genres: [] });
     useEffect(() => {
-      spotify.getMyTopArtists({ time_range: "long_term" }).then((data) => {
-        Promise.all(
-          data.items.map((artist) => spotify.getArtist(artist.id))
-        ).then((artistData) => {
-          const genres = artistData.map((artist) => artist.genres).flat();
-          setTopArtistsAllTime({ artists: data.items, genres });
+        spotify.getMyTopArtists({ time_range: "long_term" }).then((data) => {
+            Promise.all(
+                data.items.map((artist) => spotify.getArtist(artist.id))
+            ).then((artistData) => {
+                const genres = artistData.map((artist) => artist.genres).flat();
+                setTopArtistsAllTime({ artists: data.items, genres });
+            });
         });
-      });
     }, []);
 
     function genreAllTime() {
-      let genreCounts = {};
-      topArtistsAllTime.genres.forEach((genre) => {
-        if (!genreCounts[genre]) {
-          genreCounts[genre] = 1;
-        } else {
-          genreCounts[genre]++;
-        }
-      });
-      const topGenreAllTime = Object.keys(genreCounts).sort(
-        (a, b) => genreCounts[b] - genreCounts[a]
-      )[0];
-      return topGenreAllTime;
+        let genreCounts = {};
+        topArtistsAllTime.genres.forEach((genre) => {
+            if (!genreCounts[genre]) {
+                genreCounts[genre] = 1;
+            } else {
+                genreCounts[genre]++;
+            }
+        });
+        const topGenreAllTime = Object.keys(genreCounts).sort(
+            (a, b) => genreCounts[b] - genreCounts[a]
+        )[0];
+        return topGenreAllTime;
     }
 
 
@@ -109,7 +109,7 @@ export function GenerateCard() {
             });
         });
     }, []);
-    
+
     const [topSongAllTime, setTopSongAllTime] = useState({});
     useEffect(() => {
         spotify.getMyTopTracks({ time_range: "long_term" }).then((data) => {
@@ -122,7 +122,7 @@ export function GenerateCard() {
         });
     }, []);
 
-    
+
     // SEARCH FUNCTIONS FOR TOP ARTIST
 
     const [topArtistCurrent, setTopArtistCurrent] = useState({});
@@ -160,7 +160,7 @@ export function GenerateCard() {
             });
         });
     }, []);
-    
+
     return (
         // <div>
         //     <h1>Hello {User.name}!!!</h1>
@@ -176,66 +176,66 @@ export function GenerateCard() {
         //     <h1>Current favourite artist: {topArtistCurrent.name}</h1>
         // </div>
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
-                <div class="flex flex-wrap rounded-xl h-3/4 md:h-4/6 sm:w-5/6 lg:w-5/6 xl:w-3/6 bg-offwhite shadow-gray-900/30 shadow-lg p-2">
-                    <div class="flex flex-wrap h-2/6 w-full content-center p-6">
-                        <div class="w-full">
-                            <img class="m-auto rounded-full w-2/6 md:w-1/12" src={User.profile}/>
-                        </div>
-                        <h1 class="font-coolvetica text-3xl basis-full text-center">{User.name}</h1>
-                        <h1 class="font-manrope text-md basis-full text-center"><b>{User.followers}</b> Followers</h1>
+            <div class="flex flex-wrap rounded-xl h-5/6 md:h-4/6 sm:w-5/6 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg p-3 text-white">
+                <div class="flex flex-wrap w-full content-center p-2">
+                    <div class="w-full">
+                        <img class="m-auto rounded-full w-2/6 md:w-1/12" src={User.profile} />
                     </div>
-                    <div class="flex h-3/6 basis-full">
-                        <div class="w-1/2">
-                            <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">current top artist</h1>
-                                <div class="flex items-center bg-white">
-                                    <img class="w-9" src={topArtistCurrent.cover} />
-                                    <a href={topArtistCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistCurrent.name}</a>
-                                </div>
-                            </div>
-                            <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">current top genre</h1>
-                                <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreCurrent()}</h1>
-                            </div>
-                            <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">current top song</h1>
-                                <div class="flex items-center bg-white">
-                                    <img class="w-9" src={topSongCurrent.cover} />
-                                    <a href={topSongCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongCurrent.artist} - {topSongCurrent.name}</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="w-1/2">
+                    <h1 class="font-coolvetica text-2xl basis-full text-center">{User.name}</h1>
+                    <h1 class="font-manrope text-sm basis-full text-center"><b>{User.followers}</b> Followers</h1>
+                </div>
+                <div class="flex basis-full p-2 gap-2">
+                    <div class="w-1/2">
                         <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">all-time top artist</h1>
-                                <div class="flex items-center bg-white">
-                                    <img class="w-9" src={topArtistAllTime.cover} />
-                                    <a href={topArtistAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistAllTime.name}</a>
-                                </div>
+                            <h1 class="font-manrope font-light text-sm">current top artist</h1>
+                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
+                                <img class="w-9" src={topArtistCurrent.cover} />
+                                <a href={topArtistCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistCurrent.name}</a>
                             </div>
-
-                            <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">all-time top genre</h1>
-                                <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreAllTime()}</h1>
-                            </div>
-
-                            <div class="my-4">
-                                <h1 class="font-manrope font-bold text-sm">all-time top song</h1>
-                                <div class="flex items-center bg-white">
-                                    <img class="w-9" src={topSongAllTime.cover} />
-                                    <a href={topSongAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongAllTime.artist} - {topSongAllTime.name}</a>
-                                </div>
+                        </div>
+                        <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">current top genre</h1>
+                            <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreCurrent()}</h1>
+                        </div>
+                        <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">current top song</h1>
+                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
+                                <img class="w-9" src={topSongCurrent.cover} />
+                                <a href={topSongCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongCurrent.artist} - {topSongCurrent.name}</a>
                             </div>
                         </div>
                     </div>
-                    <div class="w-full h-1/6">
-                            <h1 class="font-manrope font-bold text-sm">most recently played song</h1>
-                            <div class="flex items-center bg-white">
-                                <img class="w-9" src={recentlyPlayed.cover} />
-                                <a href={recentlyPlayed.link} class="font-coolvetica text-sm ml-2" target="_blank">{recentlyPlayed.artist} - {recentlyPlayed.name}</a>
+                    <div class="w-1/2">
+                        <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">all-time top artist</h1>
+                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
+                                <img class="w-9" src={topArtistAllTime.cover} />
+                                <a href={topArtistAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistAllTime.name}</a>
                             </div>
+                        </div>
+
+                        <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">all-time top genre</h1>
+                            <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreAllTime()}</h1>
+                        </div>
+
+                        <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">all-time top song</h1>
+                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
+                                <img class="w-9" src={topSongAllTime.cover} />
+                                <a href={topSongAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongAllTime.artist} - {topSongAllTime.name}</a>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </body>
+                <div class="w-full p-2 gap-2">
+                    <h1 class="font-manrope font-light text-sm">most recently played song</h1>
+                    <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
+                        <img class="w-9" src={recentlyPlayed.cover} />
+                        <a href={recentlyPlayed.link} class="font-coolvetica text-sm ml-2" target="_blank">{recentlyPlayed.artist} - {recentlyPlayed.name}</a>
+                    </div>
+                </div>
+            </div>
+        </body>
     );
 }
