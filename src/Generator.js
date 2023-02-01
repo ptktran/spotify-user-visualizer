@@ -176,64 +176,78 @@ export function GenerateCard() {
         //     <h1>Current favourite artist: {topArtistCurrent.name}</h1>
         // </div>
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
-            <div class="flex flex-wrap rounded-xl h-5/6 md:h-4/6 sm:w-5/6 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg p-3 text-white">
-                <div class="flex flex-wrap w-full content-center p-2">
-                    <div class="w-full">
-                        <img class="m-auto rounded-full w-2/6 md:w-1/12" src={User.profile} />
+            <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
+                <div class="flex flex-wrap w-full bg-spotify-black md:px-2 rounded-tr-xl rounded-tl-xl">                    
+                    <div class="w-1/6 md:w-1/12 my-3 mx-2">
+                        <img class="border-2 border-spotify-green rounded-full" src={User.profile} />
                     </div>
-                    <h1 class="font-coolvetica text-2xl basis-full text-center">{User.name}</h1>
-                    <h1 class="font-manrope text-sm basis-full text-center"><b>{User.followers}</b> Followers</h1>
+                    <div class="flex flex-wrap h-max my-auto mx-2 items-center">
+                        <h1 class="font-coolvetica text-2xl basis-full">{User.name}</h1>
+                        <h1 class="font-manrope text-sm basis-full"><b>{User.followers}</b> Followers</h1>
+                    </div>
                 </div>
-                <div class="flex basis-full p-2 gap-2">
+                <div class="flex basis-full h-max px-2 md:px-4 gap-3">
                     <div class="w-1/2">
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">current top artist</h1>
-                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
-                                <img class="w-9" src={topArtistCurrent.cover} />
-                                <a href={topArtistCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistCurrent.name}</a>
-                            </div>
-                        </div>
                         <div class="my-4">
                             <h1 class="font-manrope font-light text-sm">current top genre</h1>
                             <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreCurrent()}</h1>
                         </div>
+
                         <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">current top artist</h1>
+                            <a href={topArtistCurrent.link} target="_blank">
+                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                    <img class="w-9" src={topArtistCurrent.cover} />
+                                    <h1 class="font-coolvetica text-sm ml-2">{topArtistCurrent.name}</h1>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div>
                             <h1 class="font-manrope font-light text-sm">current top song</h1>
-                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
-                                <img class="w-9" src={topSongCurrent.cover} />
-                                <a href={topSongCurrent.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongCurrent.artist} - {topSongCurrent.name}</a>
-                            </div>
+                            <a href={topSongCurrent.link} target="_blank">
+                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                    <img class="w-9" src={topSongCurrent.cover} />
+                                    <h1 class="font-coolvetica text-sm ml-2">{topSongCurrent.artist} - {topSongCurrent.name}</h1>
+                                </button>
+                            </a>
                         </div>
                     </div>
                     <div class="w-1/2">
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">all-time top artist</h1>
-                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
-                                <img class="w-9" src={topArtistAllTime.cover} />
-                                <a href={topArtistAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topArtistAllTime.name}</a>
-                            </div>
-                        </div>
-
                         <div class="my-4">
                             <h1 class="font-manrope font-light text-sm">all-time top genre</h1>
                             <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreAllTime()}</h1>
                         </div>
 
                         <div class="my-4">
+                            <h1 class="font-manrope font-light text-sm">all-time top artist</h1>
+                            <a href={topArtistAllTime.link} target="_blank">
+                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                    <img class="w-9" src={topArtistAllTime.cover} />
+                                    <h1 class="font-coolvetica text-sm ml-2">{topArtistAllTime.name}</h1>
+                                </button>
+                            </a>
+                        </div>
+
+                        <div>
                             <h1 class="font-manrope font-light text-sm">all-time top song</h1>
-                            <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
-                                <img class="w-9" src={topSongAllTime.cover} />
-                                <a href={topSongAllTime.link} class="font-coolvetica text-sm ml-2" target="_blank">{topSongAllTime.artist} - {topSongAllTime.name}</a>
-                            </div>
+                            <a href={topSongAllTime.link} target="_blank">
+                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                    <img class="w-9" src={topSongAllTime.cover} />
+                                    <h1 class="font-coolvetica text-sm ml-2">{topSongAllTime.artist} - {topSongAllTime.name}</h1>
+                                </button>
+                            </a>
                         </div>
                     </div>
                 </div>
-                <div class="w-full p-2 gap-2">
+                <div class="w-full px-2 md:px-4 pb-7 pt-5 gap-2 h-max">
                     <h1 class="font-manrope font-light text-sm">most recently played song</h1>
-                    <div class="flex items-center bg-spotify-black rounded-md w-full p-1">
-                        <img class="w-9" src={recentlyPlayed.cover} />
-                        <a href={recentlyPlayed.link} class="font-coolvetica text-sm ml-2" target="_blank">{recentlyPlayed.artist} - {recentlyPlayed.name}</a>
-                    </div>
+                    <a href={recentlyPlayed.link} target="_blank">
+                        <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                            <img class="w-9" src={recentlyPlayed.cover} />
+                            <h1 class="font-coolvetica text-sm ml-2">{recentlyPlayed.artist} - {recentlyPlayed.name}</h1>
+                        </button>
+                    </a>
                 </div>
             </div>
         </body>

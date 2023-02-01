@@ -40,7 +40,7 @@ module.exports = {
         },
         backgroundImage: {
             'home-gradient': "url('./assets/bg.jpg')",
-            '2nd-gradient': "url('./assets/bg4.png')"
+            '2nd-gradient': "url('./assets/bg2.jpg')"
         }
     },
   },
