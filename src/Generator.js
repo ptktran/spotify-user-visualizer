@@ -33,11 +33,10 @@ export function GenerateCard() {
             setUser({
                 name: user.display_name,
                 followers: user.followers.total,
-                profile: user.images[0].url
-            })
-        })
-    }, [])
-
+                profile: user.images[0] ? user.images[0].url : false
+            });
+        });
+    }, []);
 
     // SEARCH FUNCTIONS FOR TOP GENRE
 
@@ -161,6 +160,8 @@ export function GenerateCard() {
         });
     }, []);
 
+    const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
+
     return (
         // <div>
         //     <h1>Hello {User.name}!!!</h1>
@@ -179,7 +180,7 @@ export function GenerateCard() {
             <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
                 <div class="flex flex-wrap w-full bg-spotify-black md:px-2 rounded-tr-xl rounded-tl-xl">                    
                     <div class="w-1/6 md:w-1/12 my-3 mx-2">
-                        <img class="border-2 border-spotify-green rounded-full" src={User.profile} />
+                        <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault}/>
                     </div>
                     <div class="flex flex-wrap h-max my-auto mx-2 items-center">
                         <h1 class="font-coolvetica text-2xl basis-full">{User.name}</h1>
