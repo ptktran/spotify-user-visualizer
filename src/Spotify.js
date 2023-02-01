@@ -1,5 +1,5 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
-const redirectUri = "http://192.168.2.37:3000/";
+const redirectUri = "https://biovisualizer.vercel.app/";
 const clientId = "befbe424967c4a1fb35027bbb437ea0c";
 
 const scopes = [
