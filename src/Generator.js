@@ -271,7 +271,7 @@ export function GenerateCard() {
                             </button>
                         </a>
                     </div>
-                    : null}
+                    : <div></div>}
             </div>
         </body>
     );
