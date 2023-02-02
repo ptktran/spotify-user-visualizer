@@ -19,9 +19,9 @@ export function CheckToken() {
     }
 
     const refreshToken = () => {
-        const spotifyApi = new SpotifyWebApi();
-        spotifyApi.setRefreshToken(localStorage.getItem('refreshToken'));
-        spotifyApi.refreshAccessToken().then(
+        const spotify = new SpotifyWebApi();
+        spotify.setRefreshToken(localStorage.getItem('refreshToken'));
+        spotify.refreshAccessToken().then(
             function (data) {
                 localStorage.setItem('accessToken', data.access_token);
                 user_token = data.access_token;
