@@ -177,7 +177,7 @@ export function GenerateCard() {
                 link: data.items[0].track.external_urls.spotify
             });
         });
-    }, []);
+    }, [recentlyPlayed]);
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
