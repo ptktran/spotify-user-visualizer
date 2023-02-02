@@ -41,8 +41,6 @@ export function CheckToken() {
     return user_token;
 }
 
-console.log(user_token);
-
 export function GenerateCard() {
     spotify.setAccessToken(user_token);
 
@@ -184,22 +182,9 @@ export function GenerateCard() {
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
     return (
-        // <div>
-        //     <h1>Hello {User.name}!!!</h1>
-        //     <div>{User.followers} followers</div>
-        //     <img src={User.profile} width="10%"/>
-        //     <h1>Current favourite genre: {genreCurrent()}</h1>
-        //     <h1>All-time favourite genre: {genreAllTime()}</h1>
-        //     <h1>Current favourite song: {topSongCurrent.name} by {topSongCurrent.artist}</h1>
-        //     <img src={topSongCurrent.cover} alt="" width="20%"/>
-        //     <h1>All-time favourite song: <a href={topSongAllTime.link} target="_blank">{topSongAllTime.name} by {topSongAllTime.artist}</a></h1>
-        //     <img src={topSongAllTime.cover} alt="" width="20%"/>
-        //     <h1>All-time favourite artist: {topArtistAllTime.name}</h1>
-        //     <h1>Current favourite artist: {topArtistCurrent.name}</h1>
-        // </div>
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
             <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
-                <div class="flex flex-wrap w-full bg-spotify-black md:px-2 rounded-tr-xl rounded-tl-xl">
+                <div class="flex flex-wrap w-full bg-spotify-black py-2 px-3 rounded-tr-xl rounded-tl-xl">
                     <div class="w-1/6 md:w-1/12 my-3 mx-2">
                         <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
                     </div>
@@ -208,7 +193,7 @@ export function GenerateCard() {
                         <h1 class="font-manrope text-sm basis-full"><b>{User.followers}</b> Followers</h1>
                     </div>
                 </div>
-                <div class="flex basis-full h-max px-2 md:px-4 gap-3">
+                <div class="flex basis-full h-max px-3 md:px-5 gap-3">
                     <div class="w-1/2">
                         <div class="my-4">
                             <h1 class="font-manrope font-light text-sm">current top genre</h1>
@@ -262,7 +247,7 @@ export function GenerateCard() {
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-2 md:px-4 pb-7 pt-5 gap-2 h-max">
+                <div class="w-full px-2 md:px-4 pb-9 pt-5 gap-2 h-max">
                     <h1 class="font-manrope font-light text-sm">most recently played song</h1>
                     <a href={recentlyPlayed.link} target="_blank">
                         <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
