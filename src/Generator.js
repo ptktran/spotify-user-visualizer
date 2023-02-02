@@ -181,7 +181,7 @@ export function GenerateCard() {
                 });
             }
         });
-    }, [currentlyPlaying]);
+    }, []);
 
     function currentlyPlayingDiv(link, cover, time, total, name, artist) {
         return (
@@ -190,7 +190,7 @@ export function GenerateCard() {
                 <a href={link} target="_blank">
                     <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
                         <img class="w-9" src={cover} />
-                        <h1 class="font-coolvetica text-sm ml-2">♫ {convertToMinutes(time)} / {convertToMinutes(total)} | {artist} - {name} </h1>
+                        <h1 class="font-coolvetica text-sm ml-2">♫ @{convertToMinutes(time)} | {artist} - {name} </h1>
                     </button>
                 </a>
             </div>
