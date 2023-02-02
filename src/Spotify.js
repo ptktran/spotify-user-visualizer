@@ -8,6 +8,7 @@ const scopes = [
     "user-top-read",
     "user-read-private",
     "user-read-email",
+    "user-library-read"
 ];
 
 export const getTokenFromUrl = () => {
