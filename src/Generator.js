@@ -179,13 +179,18 @@ export function GenerateCard() {
         });
     }, [recentlyPlayed]);
 
-    const [currentlyPlaying, setCurrentlyPlaying] = useState({}); 
+    const [currentlyPlaying, setCurrentlyPlaying] = useState({});
     useEffect(() => {
         spotify.getMyCurrentPlayingTrack().then((data) => {
             if (data) {
-                console.log(data);
+                setCurrentlyPlaying({
+                    name: data.item.name,
+                    artist: data.item.artists[0].name,
+                    cover: data.item.album.images[2].url,
+                    link: data.item.external_urls.spotify
+                });
             } else {
-                console.log(data);
+                return null;
             }
         });
     }, [currentlyPlaying]);
@@ -266,6 +271,19 @@ export function GenerateCard() {
                             <h1 class="font-coolvetica text-sm ml-2">{recentlyPlayed.artist} - {recentlyPlayed.name}</h1>
                         </button>
                     </a>
+                </div>
+                <div>
+                    {currentlyPlaying ? 
+                    <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
+                        <h1 class="font-manrope font-light text-sm">currently playing song</h1>
+                        <a href={currentlyPlaying.link} target="_blank">
+                            <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                <img class="w-9" src={currentlyPlaying.cover} />
+                                <h1 class="font-coolvetica text-sm ml-2">{currentlyPlaying.artist} - {currentlyPlaying.name}</h1>
+                            </button>
+                        </a>
+                    </div>
+                    : null };
                 </div>
             </div>
         </body>
