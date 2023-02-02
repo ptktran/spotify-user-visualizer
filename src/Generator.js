@@ -153,7 +153,7 @@ export function GenerateCard() {
                 link: data.items[0].track.external_urls.spotify
             });
         });
-    }, []);
+    }, [recentlyPlayed]);
 
     function convertToMinutes(total_ms) {
         let minutes = Math.floor(total_ms / 60000);
@@ -165,23 +165,23 @@ export function GenerateCard() {
         );
     }
 
-    const [currentlyPlaying, setCurrentlyPlaying] = useState({});
-    useEffect(() => {
-        spotify.getMyCurrentPlayingTrack().then((data) => {
-            if (data === "") {
-                setCurrentlyPlaying(null);
-            } else {
-                setCurrentlyPlaying({
-                    name: data.item.name,
-                    artist: data.item.artists[0].name,
-                    cover: data.item.album.images[2].url,
-                    link: data.item.external_urls.spotify,
-                    time: data.progress_ms,
-                    total_time: data.item.duration_ms,
-                });
-            }
-        });
-    }, []);
+    // const [currentlyPlaying, setCurrentlyPlaying] = useState({});
+    // useEffect(() => {
+    //     spotify.getMyCurrentPlayingTrack().then((data) => {
+    //         if (data === "") {
+    //             setCurrentlyPlaying(null);
+    //         } else {
+    //             setCurrentlyPlaying({
+    //                 name: data.item.name,
+    //                 artist: data.item.artists[0].name,
+    //                 cover: data.item.album.images[2].url,
+    //                 link: data.item.external_urls.spotify,
+    //                 time: data.progress_ms,
+    //                 total_time: data.item.duration_ms,
+    //             });
+    //         }
+    //     });
+    // }, []);
 
     function currentlyPlayingDiv(link, cover, time, total, name, artist) {
         return (
@@ -274,7 +274,7 @@ export function GenerateCard() {
                         </button>
                     </a>
                 </div>
-                {!currentlyPlaying ? <div></div> : currentlyPlayingDiv(currentlyPlaying.link, currentlyPlaying.cover, currentlyPlaying.time, currentlyPlaying.total_time, currentlyPlaying.name, currentlyPlaying.artist)}
+                {/* {!currentlyPlaying ? <div></div> : currentlyPlayingDiv(currentlyPlaying.link, currentlyPlaying.cover, currentlyPlaying.time, currentlyPlaying.total_time, currentlyPlaying.name, currentlyPlaying.artist)} */}
             </div>
         </body>
     );
