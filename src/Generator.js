@@ -7,20 +7,41 @@ let user_token = null;
 
 export function CheckToken() {
     const hash = getTokenFromUrl();
-    window.location.hash = "";
+    window.location.hash = '';
     const token = hash.access_token;
 
     if (token) {
-        user_token = token
+        user_token = token;
+        localStorage.setItem('accessToken', token);
+        localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
+    } else {
+        user_token = localStorage.getItem('accessToken');
     }
-    return (user_token);
+
+    const refreshToken = () => {
+        const spotifyApi = new SpotifyWebApi();
+        spotifyApi.setRefreshToken(localStorage.getItem('refreshToken'));
+        spotifyApi.refreshAccessToken().then(
+            function (data) {
+                localStorage.setItem('accessToken', data.access_token);
+                user_token = data.access_token;
+                localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
+            },
+            function (err) {
+                console.error(err);
+            }
+        );
+    };
+
+    const accessTokenExpiration = localStorage.getItem('accessTokenExpiration');
+    if (accessTokenExpiration && Date.now() > accessTokenExpiration) {
+        refreshToken();
+    }
+
+    return user_token;
 }
 
-// name, followers DONE
-// favourite genre DONE
-// favourite song
-// favourite artist
-// recently played song
+console.log(user_token);
 
 export function GenerateCard() {
     spotify.setAccessToken(user_token);
@@ -178,9 +199,9 @@ export function GenerateCard() {
         // </div>
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
             <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
-                <div class="flex flex-wrap w-full bg-spotify-black md:px-2 rounded-tr-xl rounded-tl-xl">                    
+                <div class="flex flex-wrap w-full bg-spotify-black md:px-2 rounded-tr-xl rounded-tl-xl">
                     <div class="w-1/6 md:w-1/12 my-3 mx-2">
-                        <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault}/>
+                        <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
                     </div>
                     <div class="flex flex-wrap h-max my-auto mx-2 items-center">
                         <h1 class="font-coolvetica text-2xl basis-full">{User.name}</h1>

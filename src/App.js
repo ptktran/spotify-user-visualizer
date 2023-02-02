@@ -5,13 +5,7 @@ import Login from './Login.js';
 function App() {
     return (
         <div>
-            {!CheckToken() ? 
-                (<Login />) : (
-                <div>
-                    <GenerateCard />
-                </div>
-            )}
-
+            {CheckToken() ? (<GenerateCard />) : (<Login />)}
         </div>
     );
 }
