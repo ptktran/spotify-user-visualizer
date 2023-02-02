@@ -3,7 +3,7 @@ import { getTokenFromUrl } from './Spotify';
 import SpotifyWebApi from "spotify-web-api-js";
 import { clientId, clientSecret } from "./Spotify";
 
-const spotify = new SpotifyWebApi();
+const spotify = new SpotifyWebApi;
 let user_token = null;
 
 export function CheckToken() {
