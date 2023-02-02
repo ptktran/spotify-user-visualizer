@@ -39,6 +39,7 @@ export function CheckToken() {
           localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
         } catch (err) {
           console.error(err);
+          return null;
         }
       };
 
