@@ -184,7 +184,7 @@ export function GenerateCard() {
     return (
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
             <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
-                <div class="flex flex-wrap w-full bg-spotify-black py-2 px-3 rounded-tr-xl rounded-tl-xl">
+                <div class="flex flex-wrap w-full bg-spotify-black py-2 px-2 md:px-3 rounded-tr-xl rounded-tl-xl">
                     <div class="w-1/6 md:w-1/12 my-3 mx-2">
                         <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
                     </div>
@@ -247,7 +247,7 @@ export function GenerateCard() {
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-2 md:px-4 pb-9 pt-5 gap-2 h-max">
+                <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
                     <h1 class="font-manrope font-light text-sm">most recently played song</h1>
                     <a href={recentlyPlayed.link} target="_blank">
                         <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
