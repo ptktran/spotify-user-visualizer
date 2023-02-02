@@ -168,8 +168,9 @@ export function GenerateCard() {
     const [currentlyPlaying, setCurrentlyPlaying] = useState({});
     useEffect(() => {
         spotify.getMyCurrentPlayingTrack().then((data) => {
-            if (data) {
-                console.log(data);
+            if (data === "") {
+                setCurrentlyPlaying(null);
+            } else {
                 setCurrentlyPlaying({
                     name: data.item.name,
                     artist: data.item.artists[0].name,
@@ -178,15 +179,13 @@ export function GenerateCard() {
                     time: data.progress_ms,
                     total_time: data.item.duration_ms,
                 });
-            } else {
-                return null;
             }
         });
     }, [currentlyPlaying]);
 
     function currentlyPlayingDiv(link, cover, time, total, name, artist) {
         return (
-            <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
+            <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
                 <h1 class="font-manrope font-light text-sm">currently playing</h1>
                 <a href={link} target="_blank">
                     <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
@@ -202,7 +201,7 @@ export function GenerateCard() {
 
     return (
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
-            <div class="flex flex-wrap items-center rounded-xl h-fit sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
+            <div class="flex flex-wrap items-center rounded-xl h-fit pb-9 sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
                 <div class="flex flex-wrap w-full bg-spotify-black py-2 px-2 md:px-3 rounded-tr-xl rounded-tl-xl">
                     <div class="w-1/6 md:w-1/12 my-3 mx-2">
                         <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
@@ -275,7 +274,7 @@ export function GenerateCard() {
                         </button>
                     </a>
                 </div>
-                {!currentlyPlaying ? <div>{currentlyPlaying}</div> : currentlyPlayingDiv()}
+                {!currentlyPlaying ? <div></div> : currentlyPlayingDiv(currentlyPlaying.link, currentlyPlaying.cover, currentlyPlaying.time, currentlyPlaying.total_time, currentlyPlaying.name, currentlyPlaying.artist)}
             </div>
         </body>
     );
