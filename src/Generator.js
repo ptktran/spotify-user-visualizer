@@ -179,8 +179,14 @@ export function GenerateCard() {
         });
     }, [recentlyPlayed]);
 
-    function convertToMinutes(total_seconds) {
-        return new Date(total_seconds).toISOString().slice(11,19);
+    function convertToMinutes(total_ms) {
+        let minutes = Math.floor(total_ms / 60000);
+        let seconds = ((total_ms % 60000) / 1000).toFixed(0);
+        return (
+            seconds == 60 ?
+                (minutes + 1) + ":00" :
+                minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+        );
     }
 
     const [currentlyPlaying, setCurrentlyPlaying] = useState({});
@@ -199,7 +205,7 @@ export function GenerateCard() {
                 return null;
             }
         });
-    },[]);
+    }, []);
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
