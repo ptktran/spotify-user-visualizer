@@ -179,6 +179,17 @@ export function GenerateCard() {
         });
     }, [recentlyPlayed]);
 
+    const [currentlyPlaying, setCurrentlyPlaying] = useState({}); 
+    useEffect(() => {
+        spotify.getMyCurrentPlayingTrack().then((data) => {
+            if (data) {
+                console.log(data);
+            } else {
+                console.log(data);
+            }
+        });
+    }, [currentlyPlaying]);
+
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
     return (
