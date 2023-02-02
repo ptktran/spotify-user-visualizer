@@ -184,6 +184,20 @@ export function GenerateCard() {
         });
     }, [currentlyPlaying]);
 
+    function currentlyPlayingDiv(link, cover, time, total, name, artist) {
+        return (
+            <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
+                <h1 class="font-manrope font-light text-sm">currently playing</h1>
+                <a href={link} target="_blank">
+                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                        <img class="w-9" src={cover} />
+                        <h1 class="font-coolvetica text-sm ml-2">♫ {convertToMinutes(time)} / {convertToMinutes(total)} | {artist} - {name} </h1>
+                    </button>
+                </a>
+            </div>
+        )
+    }
+
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
     return (
@@ -253,7 +267,7 @@ export function GenerateCard() {
                     </div>
                 </div>
                 <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
-                    <h1 class="font-manrope font-light text-sm">most recently played song</h1>
+                    <h1 class="font-manrope font-light text-sm">recently played</h1>
                     <a href={recentlyPlayed.link} target="_blank">
                         <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
                             <img class="w-9" src={recentlyPlayed.cover} />
@@ -261,16 +275,7 @@ export function GenerateCard() {
                         </button>
                     </a>
                 </div>
-                {currentlyPlaying ?
-                    <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
-                        <h1 class="font-manrope font-light text-sm">currently playing</h1>
-                        <a href={currentlyPlaying.link} target="_blank">
-                            <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                                <img class="w-9" src={currentlyPlaying.cover} />
-                                <h1 class="font-coolvetica text-sm ml-2">♫ {convertToMinutes(currentlyPlaying.time)} / {convertToMinutes(currentlyPlaying.total_time)} | {currentlyPlaying.artist} - {currentlyPlaying.name} </h1>
-                            </button>
-                        </a>
-                    </div>
+                {currentlyPlaying ? currentlyPlayingDiv()
                     : <div></div>}
             </div>
         </body>
