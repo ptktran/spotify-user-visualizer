@@ -153,7 +153,7 @@ export function GenerateCard() {
                 link: data.items[0].track.external_urls.spotify
             });
         });
-    }, [recentlyPlayed]);
+    }, []);
 
     function convertToMinutes(total_ms) {
         let minutes = Math.floor(total_ms / 60000);
