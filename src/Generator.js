@@ -183,6 +183,7 @@ export function GenerateCard() {
     useEffect(() => {
         spotify.getMyCurrentPlayingTrack().then((data) => {
             if (data) {
+                console.log(data);
                 setCurrentlyPlaying({
                     name: data.item.name,
                     artist: data.item.artists[0].name,
