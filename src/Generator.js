@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTokenFromUrl } from './Spotify';
 import SpotifyWebApi from "spotify-web-api-js";
+import { clientId, clientSecret } from "./Spotify";
 
 const spotify = new SpotifyWebApi();
 let user_token = null;
@@ -18,19 +19,27 @@ export function CheckToken() {
         user_token = localStorage.getItem('accessToken');
     }
 
-    const refreshToken = () => {
+    const refreshToken = async () => {
         const refreshToken = localStorage.getItem('refreshToken');
-        const spotify = new SpotifyWebApi();
-        spotify.refreshAccessToken(refreshToken).then(
-          function(data) {
-            localStorage.setItem('accessToken', data.access_token);
-            user_token = data.access_token;
-            localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
-          },
-          function(err) {
-            console.error(err);
-          }
-        );
+        try {
+          const response = await fetch(
+            'https://accounts.spotify.com/api/token',
+            {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
+              },
+              body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
+            }
+          );
+          const data = await response.json();
+          localStorage.setItem('accessToken', data.access_token);
+          user_token = data.access_token;
+          localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
+        } catch (err) {
+          console.error(err);
+        }
       };
 
     const accessTokenExpiration = localStorage.getItem('accessTokenExpiration');
