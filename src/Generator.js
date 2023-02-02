@@ -272,8 +272,7 @@ export function GenerateCard() {
                         </button>
                     </a>
                 </div>
-                <div>
-                    {currentlyPlaying ? 
+                {currentlyPlaying ?
                     <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
                         <h1 class="font-manrope font-light text-sm">currently playing song</h1>
                         <a href={currentlyPlaying.link} target="_blank">
@@ -283,8 +282,7 @@ export function GenerateCard() {
                             </button>
                         </a>
                     </div>
-                    : null };
-                </div>
+                    : null}
             </div>
         </body>
     );
