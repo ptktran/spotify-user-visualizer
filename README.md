@@ -12,6 +12,6 @@ and i can add your email :)
 
 <p align="center">on desktop</p>
 <p align="center">
-<img src="https://user-images.githubusercontent.com/39758539/216267591-ee5c62a6-919f-4243-80f9-28dfc0391c01.png"
+<img src="https://user-images.githubusercontent.com/39758539/216270083-8b14e4a8-031a-46ce-bda3-2f5c21bb1649.png"
 </p>
 
