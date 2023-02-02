@@ -8,47 +8,13 @@ let user_token = null;
 
 export function CheckToken() {
     const hash = getTokenFromUrl();
-    window.location.hash = '';
+    window.location.hash = "";
     const token = hash.access_token;
 
     if (token) {
-        user_token = token;
-        localStorage.setItem('accessToken', token);
-        localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
-    } else {
-        user_token = localStorage.getItem('accessToken');
+        user_token = token
     }
-
-    const refreshToken = async () => {
-        const refreshToken = localStorage.getItem('refreshToken');
-        try {
-          const response = await fetch(
-            'https://accounts.spotify.com/api/token',
-            {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/x-www-form-urlencoded',
-                Authorization: `Basic ${btoa(`${clientId}:${clientSecret}`)}`,
-              },
-              body: `grant_type=refresh_token&refresh_token=${refreshToken}`,
-            }
-          );
-          const data = await response.json();
-          localStorage.setItem('accessToken', data.access_token);
-          user_token = data.access_token;
-          localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
-        } catch (err) {
-          console.error(err);
-          return null;
-        }
-      };
-
-    const accessTokenExpiration = localStorage.getItem('accessTokenExpiration');
-    if (accessTokenExpiration && Date.now() > accessTokenExpiration) {
-        refreshToken();
-    }
-
-    return user_token;
+    return (user_token);
 }
 
 export function GenerateCard() {
