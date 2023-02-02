@@ -275,7 +275,7 @@ export function GenerateCard() {
                         </button>
                     </a>
                 </div>
-                {!currentlyPlaying ? <div></div> : currentlyPlayingDiv()}
+                {!currentlyPlaying ? <div>{currentlyPlaying}</div> : currentlyPlayingDiv()}
             </div>
         </body>
     );
