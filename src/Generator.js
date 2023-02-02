@@ -200,12 +200,13 @@ export function GenerateCard() {
                     cover: data.item.album.images[2].url,
                     link: data.item.external_urls.spotify,
                     time: data.progress_ms,
+                    total_time: data.item.duration_ms,
                 });
             } else {
                 return null;
             }
         });
-    }, []);
+    }, [currentlyPlaying]);
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
 
@@ -290,7 +291,7 @@ export function GenerateCard() {
                         <a href={currentlyPlaying.link} target="_blank">
                             <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
                                 <img class="w-9" src={currentlyPlaying.cover} />
-                                <h1 class="font-coolvetica text-sm ml-2">{currentlyPlaying.artist} - {currentlyPlaying.name} ♫ @{convertToMinutes(currentlyPlaying.time)}</h1>
+                                <h1 class="font-coolvetica text-sm ml-2">♫ {convertToMinutes(currentlyPlaying.time)} / {convertToMinutes(currentlyPlaying.total_ms)} | {currentlyPlaying.artist} - {currentlyPlaying.name} </h1>
                             </button>
                         </a>
                     </div>
