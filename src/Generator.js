@@ -19,19 +19,19 @@ export function CheckToken() {
     }
 
     const refreshToken = () => {
+        const refreshToken = localStorage.getItem('refreshToken');
         const spotify = new SpotifyWebApi();
-        spotify.setRefreshToken(localStorage.getItem('refreshToken'));
-        spotify.refreshAccessToken().then(
-            function (data) {
-                localStorage.setItem('accessToken', data.access_token);
-                user_token = data.access_token;
-                localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
-            },
-            function (err) {
-                console.error(err);
-            }
+        spotify.refreshAccessToken(refreshToken).then(
+          function(data) {
+            localStorage.setItem('accessToken', data.access_token);
+            user_token = data.access_token;
+            localStorage.setItem('accessTokenExpiration', Date.now() + 3600000);
+          },
+          function(err) {
+            console.error(err);
+          }
         );
-    };
+      };
 
     const accessTokenExpiration = localStorage.getItem('accessTokenExpiration');
     if (accessTokenExpiration && Date.now() > accessTokenExpiration) {
