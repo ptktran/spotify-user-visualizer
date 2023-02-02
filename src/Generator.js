@@ -187,7 +187,8 @@ export function GenerateCard() {
                     name: data.item.name,
                     artist: data.item.artists[0].name,
                     cover: data.item.album.images[2].url,
-                    link: data.item.external_urls.spotify
+                    link: data.item.external_urls.spotify,
+                    time: data.item.duration_ms,
                 });
             } else {
                 return null;
@@ -263,7 +264,7 @@ export function GenerateCard() {
                         </div>
                     </div>
                 </div>
-                <div class="w-full px-3 md:px-5 pb-9 pt-5 gap-2 h-max">
+                <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
                     <h1 class="font-manrope font-light text-sm">most recently played song</h1>
                     <a href={recentlyPlayed.link} target="_blank">
                         <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
@@ -278,7 +279,7 @@ export function GenerateCard() {
                         <a href={currentlyPlaying.link} target="_blank">
                             <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
                                 <img class="w-9" src={currentlyPlaying.cover} />
-                                <h1 class="font-coolvetica text-sm ml-2">{currentlyPlaying.artist} - {currentlyPlaying.name}</h1>
+                                <h1 class="font-coolvetica text-sm ml-2">{currentlyPlaying.artist} - {currentlyPlaying.name} ♫ {currentlyPlaying.time}</h1>
                             </button>
                         </a>
                     </div>
