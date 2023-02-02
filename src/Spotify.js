@@ -1,7 +1,6 @@
 export const authEndpoint = "https://accounts.spotify.com/authorize";
 const redirectUri = "https://biovisualizer.vercel.app/";
 export const clientId = "befbe424967c4a1fb35027bbb437ea0c";
-export const clientSecret = "befbe424967c4a1fb35027bbb437ea0c"
 
 const scopes = [
     "user-read-currently-playing",
@@ -9,7 +8,6 @@ const scopes = [
     "user-top-read",
     "user-read-private",
     "user-read-email",
-    "user-library-read"
 ];
 
 export const getTokenFromUrl = () => {
