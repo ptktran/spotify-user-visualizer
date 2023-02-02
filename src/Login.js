@@ -12,7 +12,7 @@ export default function Login() {
                 </div>
                 <div class="mt-6 mb-3 flex justify-center basis-full">
                     <a href={loginUrl}>
-                        <button class="rounded-full px-6 py-3 bg-spotify-green py-3 px-12 hover:bg-spotify-green/80 hover:-translate-y-0.5 active:translate-y-0.5 transition duration-100 ease">
+                        <button class="rounded-full sm:h-12 sm:w-52 md:h-18 md:w-60 bg-spotify-green py-3 px-12 hover:bg-spotify-green/80 hover:-translate-y-0.5 active:translate-y-0.5 transition duration-100 ease">
                             <img class="m-auto" src={require('./assets/spotify-logo-black.png')} alt="spotify-logo"></img>
                         </button>
                     </a>
