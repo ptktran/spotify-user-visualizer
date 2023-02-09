@@ -181,7 +181,7 @@ export function GenerateCard() {
                     });
                 }
             });
-        }, 15000);
+        }, 3000);
 
         return () => {
             clearInterval(interval);
