@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { CheckToken, GenerateCard } from "./Generator.js";
+import { CheckToken, GenerateCard, isLoading } from "./Generator.js";
 import Login from './Login.js';
+import {Loading} from './Loading';
+
 
 function App() {
     return (
         <div>
-            {CheckToken() ? (<GenerateCard />) : (<Login />)}
+            {CheckToken() ? (isLoading? <Loading /> : <GenerateCard />)
+            : (<Login />)}
         </div>
     );
 }

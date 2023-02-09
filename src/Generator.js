@@ -4,6 +4,7 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotify = new SpotifyWebApi();
 let user_token = null;
+export const [isLoading, setIsLoading] = useState(false);
 
 export function CheckToken() {
     const hash = getTokenFromUrl();
@@ -120,12 +121,14 @@ export function GenerateCard() {
 
     const [topArtistCurrent, setTopArtistCurrent] = useState({});
     useEffect(() => {
+        setIsLoading(true);
         spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
             setTopArtistCurrent({
                 name: data.items[0].name,
                 cover: data.items[0].images[2].url,
                 link: data.items[0].external_urls.spotify
             });
+            setIsLoading(false);
         });
     }, []);
 
