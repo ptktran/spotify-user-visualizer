@@ -189,22 +189,14 @@ export function GenerateCard() {
     }, [currentlyPlaying]);
 
     function currentlyPlayingDiv(link, cover, time, total, name, artist) {
-        if (!currentlyPlaying) {
-            return (
-                <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
-                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                        <h1 class="font-coolvetica text-sm ml-2">loading your currently playing song :{')'}</h1>
-                    </button>
-                </div>
-            )
-        }
         return (
             <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
                 <h1 class="font-manrope font-light text-sm">currently playing</h1>
                 <a href={link} target="_blank">
                     <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                        <img class="w-9" src={cover} />
-                        <h1 class="font-coolvetica text-sm ml-2"><span class="text-purple-300">♫</span> {convertToMinutes(time)} | {artist} - {name}</h1>
+                        {cover ? <img class="w-9" src={cover} /> : ""}
+                        {time ? <h1 class="font-coolvetica text-sm ml-2"><span class="text-purple-300">♫</span> {convertToMinutes(time)} | {artist} - {name}</h1> :
+                        <h1 class="font-coolvetica text-sm ml-2">loading your currently playing song :{')'}</h1>}
                     </button>
                 </a>
             </div>
