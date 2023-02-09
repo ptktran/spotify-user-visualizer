@@ -16,7 +16,7 @@ export function CheckToken() {
     return (user_token);
 }
 
-export const isLoading = true;
+export let isLoading = true;
 export function GenerateCard() {
 
     spotify.setAccessToken(user_token);
