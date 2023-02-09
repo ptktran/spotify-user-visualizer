@@ -23,7 +23,7 @@ export function GenerateCard() {
 
     // FUNCTION TO FETCH USER DATA
 
-    const [isLoading, setLoading] = useState(true);
+    const [isLoading, setLoading] = useState(false);
     const [User, setUser] = useState({});
     useEffect(() => {
         spotify.getMe().then((user) => {
