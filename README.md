@@ -1,11 +1,11 @@
 # <a href="https://biovisualizer.vercel.app" target="_blank">biovisualizer! 🎸🎵</a>
 a web app that generates visually appealing cards showcasing your spotify activity including favourite genres, songs, and artists. 
-<hr>
+# notes
 <b>
 👉 this project has been deployed, but is still in development mode. this means that it only works with those who have their
 spotify email added to the app since there is a user limit to the spotify api.</b> 
 <br>
-🤠<i>if you would like to try this out, send me a message and i can add your email :)</i>
+🤠 if you would like to try this out, send me a message and i can add your email :)
 
 # previews
 <p align="center">on mobile</p>
