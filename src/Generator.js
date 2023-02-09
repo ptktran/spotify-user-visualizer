@@ -121,7 +121,6 @@ export function GenerateCard() {
 
     const [topArtistCurrent, setTopArtistCurrent] = useState({});
     useEffect(() => {
-        setIsLoading(true);
         spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
             setTopArtistCurrent({
                 name: data.items[0].name,
@@ -206,7 +205,6 @@ export function GenerateCard() {
     }
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
-    setIsLoading(false);
 
     return (
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
