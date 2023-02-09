@@ -46,7 +46,6 @@ export function GenerateCard() {
                 const genres = artistData.map((artist) => artist.genres).flat();
                 setTopArtistsCurrent({ artists: data.items, genres });
             });
-            setLoading(false);
         });
     }, []);
 
@@ -155,6 +154,7 @@ export function GenerateCard() {
                 cover: data.items[0].track.album.images[2].url,
                 link: data.items[0].track.external_urls.spotify
             });
+            setLoading(false);
         });
     }, [recentlyPlayed]);
 
