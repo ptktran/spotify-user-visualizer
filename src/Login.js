@@ -6,9 +6,9 @@ export default function Login() {
         <body class="flex h-screen justify-center items-center bg-home-gradient bg-no-repeat bg-cover">
             <div class="flex flex-wrap content-center justify-evenly rounded h-96 sm:w-11/12 lg:w-3/6 xl:w-2/6 bg-spotify-grey shadow-gray-900/30 shadow-lg p-10">
                 <div class="basis-full">
-                    <h1 class="font-coolvetica text-3xl font-bold tracking-wider basis-full text-center m-3 text-purple-300 hover:animate-pulse">🎵 BioVisualizer 🎵</h1>
+                    <h1 class="font-coolvetica text-3xl font-bold tracking-wider basis-full text-center m-3 text-purple-300 hover:animate-bounce">BioVisualizer</h1>
                     <h1 class="font-manrope text-xl basis-full text-center text-white">Your Spotify stats all in one place!</h1>
-                    <h1 class="font-manrope text-xl basis-full text-center text-white">Login now to generate your personalized card :{')'} </h1>
+                    <h1 class="font-manrope text-xl basis-full text-center text-white">Login now to generate your personalized card 🎵</h1>
                 </div>
                 <div class="mt-6 mb-3 flex justify-center basis-full">
                     <a href={loginUrl}>
