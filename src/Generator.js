@@ -168,7 +168,7 @@ export function GenerateCard() {
     useEffect(() => {
         let interval = setInterval(() => {
             spotify.getMyCurrentPlayingTrack().then((data) => {
-                if (data === "") {
+                if (!data) {
                     setCurrentlyPlaying("fetching your data :)");
                 } else {
                     setCurrentlyPlaying({
