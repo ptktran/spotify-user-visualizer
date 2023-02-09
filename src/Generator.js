@@ -4,7 +4,7 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotify = new SpotifyWebApi();
 let user_token = null;
-export const [isLoading, setIsLoading] = useState(false);
+export const [isLoading, setIsLoading] = useState(true);
 
 export function CheckToken() {
     const hash = getTokenFromUrl();
@@ -128,7 +128,6 @@ export function GenerateCard() {
                 cover: data.items[0].images[2].url,
                 link: data.items[0].external_urls.spotify
             });
-            setIsLoading(false);
         });
     }, []);
 
@@ -207,6 +206,7 @@ export function GenerateCard() {
     }
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
+    setIsLoading(false);
 
     return (
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
