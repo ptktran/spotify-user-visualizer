@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { getTokenFromUrl } from './Spotify';
 import SpotifyWebApi from "spotify-web-api-js";
+import Loading from "./Loading";
 
 const spotify = new SpotifyWebApi();
 let user_token = null;
@@ -16,13 +17,13 @@ export function CheckToken() {
     return (user_token);
 }
 
-export let isLoading = true;
 export function GenerateCard() {
 
     spotify.setAccessToken(user_token);
 
     // FUNCTION TO FETCH USER DATA
 
+    const [isLoading, setLoading] = useState(true);
     const [User, setUser] = useState({});
     useEffect(() => {
         spotify.getMe().then((user) => {
@@ -45,6 +46,7 @@ export function GenerateCard() {
                 const genres = artistData.map((artist) => artist.genres).flat();
                 setTopArtistsCurrent({ artists: data.items, genres });
             });
+            setLoading(false);
         });
     }, []);
 
@@ -198,7 +200,7 @@ export function GenerateCard() {
                     <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
                         {cover ? <img class="w-9" src={cover} /> : ""}
                         {time ? <h1 class="font-coolvetica text-sm ml-2"><span class="text-purple-300">♫</span> {convertToMinutes(time)} | {artist} - {name}</h1> :
-                        <h1 class="font-coolvetica text-sm ml-2">loading your currently playing song :{')'}</h1>}
+                            <h1 class="font-coolvetica text-sm ml-2">loading your currently playing song :{')'}</h1>}
                     </button>
                 </a>
             </div>
@@ -206,85 +208,91 @@ export function GenerateCard() {
     }
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
-    isLoading = false;
-
-    return (
-        <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
-            <div class="flex flex-wrap items-center rounded-xl h-fit pb-9 sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
-                <div class="flex flex-wrap w-full bg-spotify-black py-2 px-2 md:px-3 rounded-tr-xl rounded-tl-xl">
-                    <div class="w-1/6 md:w-1/12 my-3 mx-2">
-                        <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
-                    </div>
-                    <div class="flex flex-wrap h-max my-auto mx-2 items-center">
-                        <h1 class="font-coolvetica text-2xl basis-full">{User.name}</h1>
-                        <h1 class="font-manrope text-sm basis-full"><b>{User.followers}</b> Followers</h1>
-                    </div>
-                </div>
-                <div class="flex basis-full h-max px-3 md:px-5 gap-3">
-                    <div class="w-1/2">
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">current top genre</h1>
-                            <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreCurrent()}</h1>
-                        </div>
-
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">current top artist</h1>
-                            <a href={topArtistCurrent.link} target="_blank">
-                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                                    <img class="w-9" src={topArtistCurrent.cover} />
-                                    <h1 class="font-coolvetica text-sm ml-2">{topArtistCurrent.name}</h1>
-                                </button>
-                            </a>
-                        </div>
-
-                        <div>
-                            <h1 class="font-manrope font-light text-sm">current top song</h1>
-                            <a href={topSongCurrent.link} target="_blank">
-                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                                    <img class="w-9" src={topSongCurrent.cover} />
-                                    <h1 class="font-coolvetica text-sm ml-2">{topSongCurrent.artist} - {topSongCurrent.name}</h1>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                    <div class="w-1/2">
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">all-time top genre</h1>
-                            <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreAllTime()}</h1>
-                        </div>
-
-                        <div class="my-4">
-                            <h1 class="font-manrope font-light text-sm">all-time top artist</h1>
-                            <a href={topArtistAllTime.link} target="_blank">
-                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                                    <img class="w-9" src={topArtistAllTime.cover} />
-                                    <h1 class="font-coolvetica text-sm ml-2">{topArtistAllTime.name}</h1>
-                                </button>
-                            </a>
-                        </div>
-
-                        <div>
-                            <h1 class="font-manrope font-light text-sm">all-time top song</h1>
-                            <a href={topSongAllTime.link} target="_blank">
-                                <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                                    <img class="w-9" src={topSongAllTime.cover} />
-                                    <h1 class="font-coolvetica text-sm ml-2">{topSongAllTime.artist} - {topSongAllTime.name}</h1>
-                                </button>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
-                    <h1 class="font-manrope font-light text-sm">recently played</h1>
-                    <a href={recentlyPlayed.link} target="_blank">
-                        <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
-                            <img class="w-9" src={recentlyPlayed.cover} />
-                            <h1 class="font-coolvetica text-sm ml-2">{recentlyPlayed.artist} - {recentlyPlayed.name}</h1>
-                        </button>
-                    </a>
-                </div>
-                {!currentlyPlaying ? <div></div> : currentlyPlayingDiv(currentlyPlaying.link, currentlyPlaying.cover, currentlyPlaying.time, currentlyPlaying.total_time, currentlyPlaying.name, currentlyPlaying.artist)}
+    if (isLoading) {
+        return (
+            <div>
+                <Loading />
             </div>
-        </body>
-    );
+        )
+    } else {
+        return (
+            <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
+                <div class="flex flex-wrap items-center rounded-xl h-fit pb-9 sm:w-11/12 lg:w-5/6 xl:w-3/6 bg-spotify-grey shadow-lg text-white">
+                    <div class="flex flex-wrap w-full bg-spotify-black py-2 px-2 md:px-3 rounded-tr-xl rounded-tl-xl">
+                        <div class="w-1/6 md:w-1/12 my-3 mx-2">
+                            <img class="border-2 border-spotify-green rounded-full" src={User.profile ? User.profile : userProfileDefault} />
+                        </div>
+                        <div class="flex flex-wrap h-max my-auto mx-2 items-center">
+                            <h1 class="font-coolvetica text-2xl basis-full">{User.name}</h1>
+                            <h1 class="font-manrope text-sm basis-full"><b>{User.followers}</b> Followers</h1>
+                        </div>
+                    </div>
+                    <div class="flex basis-full h-max px-3 md:px-5 gap-3">
+                        <div class="w-1/2">
+                            <div class="my-4">
+                                <h1 class="font-manrope font-light text-sm">current top genre</h1>
+                                <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreCurrent()}</h1>
+                            </div>
+
+                            <div class="my-4">
+                                <h1 class="font-manrope font-light text-sm">current top artist</h1>
+                                <a href={topArtistCurrent.link} target="_blank">
+                                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                        <img class="w-9" src={topArtistCurrent.cover} />
+                                        <h1 class="font-coolvetica text-sm ml-2">{topArtistCurrent.name}</h1>
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div>
+                                <h1 class="font-manrope font-light text-sm">current top song</h1>
+                                <a href={topSongCurrent.link} target="_blank">
+                                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                        <img class="w-9" src={topSongCurrent.cover} />
+                                        <h1 class="font-coolvetica text-sm ml-2">{topSongCurrent.artist} - {topSongCurrent.name}</h1>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="w-1/2">
+                            <div class="my-4">
+                                <h1 class="font-manrope font-light text-sm">all-time top genre</h1>
+                                <h1 class="font-coolvetica font-bold text-xl text-transparent bg-clip-text bg-gradient-to-r from-pink-500 to-violet-500">{genreAllTime()}</h1>
+                            </div>
+
+                            <div class="my-4">
+                                <h1 class="font-manrope font-light text-sm">all-time top artist</h1>
+                                <a href={topArtistAllTime.link} target="_blank">
+                                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                        <img class="w-9" src={topArtistAllTime.cover} />
+                                        <h1 class="font-coolvetica text-sm ml-2">{topArtistAllTime.name}</h1>
+                                    </button>
+                                </a>
+                            </div>
+
+                            <div>
+                                <h1 class="font-manrope font-light text-sm">all-time top song</h1>
+                                <a href={topSongAllTime.link} target="_blank">
+                                    <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                        <img class="w-9" src={topSongAllTime.cover} />
+                                        <h1 class="font-coolvetica text-sm ml-2">{topSongAllTime.artist} - {topSongAllTime.name}</h1>
+                                    </button>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="w-full px-3 md:px-5 pt-5 gap-2 h-max">
+                        <h1 class="font-manrope font-light text-sm">recently played</h1>
+                        <a href={recentlyPlayed.link} target="_blank">
+                            <button class="flex items-center bg-spotify-black rounded-md w-full p-2 hover:bg-spotify-green hover:text-black active:translate-y-0.5 transition duration-200 ease">
+                                <img class="w-9" src={recentlyPlayed.cover} />
+                                <h1 class="font-coolvetica text-sm ml-2">{recentlyPlayed.artist} - {recentlyPlayed.name}</h1>
+                            </button>
+                        </a>
+                    </div>
+                    {!currentlyPlaying ? <div></div> : currentlyPlayingDiv(currentlyPlaying.link, currentlyPlaying.cover, currentlyPlaying.time, currentlyPlaying.total_time, currentlyPlaying.name, currentlyPlaying.artist)}
+                </div>
+            </body>
+        );
+    }
 }
