@@ -18,7 +18,7 @@ export default function Login() {
                     </a>
                 </div>
                 <div class="flex gap-2">
-                    <a class="font-manrope text-sm text-zinc-400 transition duration-200 ease hover:text-zinc-400/80" target="_blank" href="https://github.com/ptktran/spotify-user-visualizer">about this project </a>
+                    <a class="font-manrope text-sm text-zinc-400 transition duration-200 ease hover:text-zinc-400/80" target="_blank" href="https://github.com/ptktran/spotify-user-visualizer">app is in limited access stage </a>
                     <b class="font-manrope text-sm text-zinc-400">∙</b>
                     <a class="font-manrope text-sm text-zinc-400 transition duration-200 ease hover:text-zinc-400/80" target="_blank" href="https://ptktran.github.io">  peter tran</a>
                 </div>
