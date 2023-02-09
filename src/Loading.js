@@ -10,6 +10,8 @@ export default function Loading() {
                 </svg>
                 <span class="sr-only">Loading...</span>
             </div>
+            <h1 class="font-manrope font-light text-sm text-center">app currently has limited access</h1>
+            <h1 class="font-manrope font-light text-sm text-center">if loading takes longer than 1 minute, please try again in 1 hour</h1>
         </body>
     )
 }
