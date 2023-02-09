@@ -166,21 +166,27 @@ export function GenerateCard() {
 
     const [currentlyPlaying, setCurrentlyPlaying] = useState({});
     useEffect(() => {
-        spotify.getMyCurrentPlayingTrack().then((data) => {
-            if (data === "") {
-                setCurrentlyPlaying(null);
-            } else {
-                setCurrentlyPlaying({
-                    name: data.item.name,
-                    artist: data.item.artists[0].name,
-                    cover: data.item.album.images[2].url,
-                    link: data.item.external_urls.spotify,
-                    time: data.progress_ms,
-                    total_time: data.item.duration_ms,
-                });
-            }
-        });
-    }, []);
+        let interval = setInterval(() => {
+            spotify.getMyCurrentPlayingTrack().then((data) => {
+                if (data === "") {
+                    setCurrentlyPlaying(null);
+                } else {
+                    setCurrentlyPlaying({
+                        name: data.item.name,
+                        artist: data.item.artists[0].name,
+                        cover: data.item.album.images[2].url,
+                        link: data.item.external_urls.spotify,
+                        time: data.progress_ms,
+                        total_time: data.item.duration_ms,
+                    });
+                }
+            });
+        }, 15000);
+
+        return () => {
+            clearInterval(interval);
+        }
+    }, [currentlyPlaying]);
 
     function currentlyPlayingDiv(link, cover, time, total, name, artist) {
         return (
