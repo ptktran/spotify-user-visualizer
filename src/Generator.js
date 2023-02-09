@@ -4,7 +4,6 @@ import SpotifyWebApi from "spotify-web-api-js";
 
 const spotify = new SpotifyWebApi();
 let user_token = null;
-export const [isLoading, setIsLoading] = useState(true);
 
 export function CheckToken() {
     const hash = getTokenFromUrl();
@@ -17,7 +16,9 @@ export function CheckToken() {
     return (user_token);
 }
 
+export const isLoading = true;
 export function GenerateCard() {
+
     spotify.setAccessToken(user_token);
 
     // FUNCTION TO FETCH USER DATA
@@ -205,6 +206,7 @@ export function GenerateCard() {
     }
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
+    isLoading = false;
 
     return (
         <body class="flex h-screen justify-center items-center bg-2nd-gradient bg-no-repeat bg-cover">
