@@ -23,7 +23,6 @@ export function GenerateCard() {
 
     // FUNCTION TO FETCH USER DATA
 
-    const [isLoading, setLoading] = useState(false);
     const [User, setUser] = useState({});
     useEffect(() => {
         spotify.getMe().then((user) => {
@@ -154,7 +153,6 @@ export function GenerateCard() {
                 cover: data.items[0].track.album.images[2].url,
                 link: data.items[0].track.external_urls.spotify
             });
-            setLoading(false);
         });
     }, [recentlyPlayed]);
 
@@ -212,6 +210,13 @@ export function GenerateCard() {
             </div>
         )
     }
+
+    const [isLoading, setLoading] = useState(true);
+    useEffect(() => {
+        if (User && topArtistCurrent && topArtistAllTime && topSongAllTime && topSongCurrent) {
+            setLoading(false);
+        }
+    })
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
     if (isLoading) {
