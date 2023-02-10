@@ -18,7 +18,7 @@ export function CheckToken() {
 }
 
 export function GenerateCard() {
-
+    const [isLoading, setLoading] = useState(true);
     spotify.setAccessToken(user_token);
 
     // FUNCTION TO FETCH USER DATA
@@ -211,7 +211,6 @@ export function GenerateCard() {
         )
     }
 
-    const [isLoading, setLoading] = useState(true);
     useEffect(() => {
         if (User && topArtistCurrent && topArtistAllTime && topSongAllTime && topSongCurrent) {
             setLoading(false);
