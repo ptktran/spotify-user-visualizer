@@ -114,6 +114,7 @@ export function GenerateCard() {
                 cover: data.items[0].album.images[2].url,
                 link: data.items[0].external_urls.spotify
             });
+            setLoading(false);
         });
     }, []);
 
@@ -211,11 +212,11 @@ export function GenerateCard() {
         )
     }
 
-    useEffect(() => {
-        if (User && topArtistCurrent && topArtistAllTime && topSongAllTime && topSongCurrent) {
-            setLoading(false);
-        }
-    })
+    // useEffect(() => {
+    //     if (User && topArtistCurrent && topArtistAllTime && topSongAllTime && topSongCurrent) {
+    //         setLoading(false);
+    //     }
+    // })
 
     const userProfileDefault = "https://i.postimg.cc/hvyYWh2g/profilepic.jpg";
     if (isLoading) {
