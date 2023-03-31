@@ -35,7 +35,6 @@ export function GenerateCard() {
     }, []);
 
     // SEARCH FUNCTIONS FOR TOP GENRE
-
     const [topArtistsCurrent, setTopArtistsCurrent] = useState({ artists: [], genres: [] });
     useEffect(() => {
         spotify.getMyTopArtists({ time_range: "short_term" }).then((data) => {
@@ -72,7 +71,7 @@ export function GenerateCard() {
                 const genres = artistData.map((artist) => artist.genres).flat();
                 setTopArtistsAllTime({ artists: data.items, genres });
             });
-        });
+        });        
     }, []);
 
     function genreAllTime() {
